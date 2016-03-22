@@ -340,7 +340,7 @@ fi
 #echo 'D/L POWHEG source...'
 
 #if [ ! -f ${POWHEGSRC} ]; then
-  wget --no-check-certificate http://cms-project-generators.web.cern.ch/cms-project-generators/slc6_amd64_gcc481/powheg/V1.0/src/${POWHEGSRC} || fail_exit "Failed to get powheg tar ball "
+  #wget --no-check-certificate http://cms-project-generators.web.cern.ch/cms-project-generators/slc6_amd64_gcc481/powheg/V1.0/src/${POWHEGSRC} || fail_exit "Failed to get powheg tar ball "
 #fi
 
 
