@@ -79,7 +79,7 @@ masswindow 10d0  !(default 10d0) number of widths around hmass in the BW for an 
 hmass 125            ! Higgs boson mass
 hwidth 3.605D-03     ! Higgs boson width
 topmass 0.0        ! top quark mass
-bottommass 4.75d0    ! bottom quark mass - if defined it enables the bottom quark
+bottommass 0.0d0    ! bottom quark mass - if defined it enables the bottom quark
 !charmmass 1.5d0     ! char quark mass - if defined it enables the charm quark
 ! Optional
 hdecaywidth 0        ! If equals to 1 read total decay width from HDECAY sm.br2 file
