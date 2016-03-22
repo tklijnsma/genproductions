@@ -6,7 +6,7 @@ if [ "$1" == "kg1" ]; then
     # Remove old dirs and files
     rm -rf ggH_kg1
     rm -rf run_full_ggH_kg1.sh
-    rm -rf run_full_ggH_kg1.log
+    #rm -rf run_full_ggH_kg1.log
     rm -rf $CARDDIR.input
     rm -rf ggH_kg1_$MODEL.tgz
 
@@ -20,7 +20,7 @@ if [ "$1" == "kt1_samecard" ]; then
     # Remove old dirs and files
     rm -rf ggH_kt1
     rm -rf run_full_ggH_kt1.sh
-    rm -rf run_full_ggH_kt1.log
+    #rm -rf run_full_ggH_kt1.log
     rm -rf $CARDDIR.input
     rm -rf ggH_kt1_$MODEL.tgz
 
@@ -34,7 +34,7 @@ if [ "$1" == "kt1" ]; then
     # Remove old dirs and files
     rm -rf ggH_kt1
     rm -rf run_full_ggH_kt1.sh
-    rm -rf run_full_ggH_kt1.log
+    #rm -rf run_full_ggH_kt1.log
     rm -rf $CARDDIR.input
     rm -rf ggH_kt1_$MODEL.tgz
 
@@ -49,7 +49,7 @@ if [ "$1" == "kt1_samecard_mtopzero" ]; then
     # Remove old dirs and files
     rm -rf ggH_kt1
     rm -rf run_full_ggH_kt1.sh
-    rm -rf run_full_ggH_kt1.log
+    #rm -rf run_full_ggH_kt1.log
     rm -rf $CARDDIR.input
     rm -rf ggH_kt1_$MODEL.tgz
 
