@@ -43,6 +43,27 @@ if [ "$1" == "kt1_samecard" ]; then
 fi
 
 
+if [ "$1" == "kt1_samecard_mtopzero" ]; then
+
+    echo "(Re)running kappa top = 1 by setting mtop to 0.0"
+
+    CARDDIR="gg_H_quark-mass-effects_NNPDF30_8TeV_noPDF_mtopzero"
+    MODEL="gg_H_quark-mass-effects"
+
+    # Remove old dirs and files
+    rm -rf ggH_kt1
+    rm -rf run_full_ggH_kt1.sh
+    rm -rf run_full_ggH_kt1.log
+    rm -rf $CARDDIR.input
+    rm -rf ggH_kt1_$MODEL.tgz
+
+    cp production/$CARDDIR/$CARDDIR.input .
+
+    python ./run_pwg.py -p f -i $CARDDIR.input -m $MODEL -f ggH_kt1 -n 57
+
+fi
+
+
 if [ "$1" == "kt1" ]; then
 
     echo "(Re)running kappa top = 1"
