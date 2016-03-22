@@ -314,14 +314,36 @@ if [[ -s ./JHUGen.input ]]; then
   echo "JHUGen activated!"
 fi
 
+
+#######################################
+############# THIS IS POWHEG V2
+#######################################
+
 ### retrieve the powheg source tar ball
-export POWHEGSRC=powhegboxV2_Mar2016.tar.gz 
+
+#export POWHEGSRC=powhegboxV2_Mar2016.tar.gz 
+
+#echo 'D/L POWHEG source...'
+
+#if [ ! -f ${POWHEGSRC} ]; then
+#  wget --no-check-certificate http://cms-project-generators.web.cern.ch/cms-project-generators/slc6_amd64_gcc481/powheg/V2.0/src/${POWHEGSRC} || fail_exit "Failed to get powheg tar ball "
+#fi
+
+#######################################
+############# THIS IS POWHEG V1
+#######################################
+
+### retrieve the powheg source tar ball
+
+export POWHEGSRC=powhegboxV1_Sep2014.tar.gz
 
 echo 'D/L POWHEG source...'
 
 if [ ! -f ${POWHEGSRC} ]; then
-  wget --no-check-certificate http://cms-project-generators.web.cern.ch/cms-project-generators/slc6_amd64_gcc481/powheg/V2.0/src/${POWHEGSRC} || fail_exit "Failed to get powheg tar ball "
+  wget --no-check-certificate http://cms-project-generators.web.cern.ch/cms-project-generators/slc6_amd64_gcc481/powheg/V1.0/src/${POWHEGSRC} || fail_exit "Failed to get powheg tar ball "
 fi
+
+
 
 tar zxf ${POWHEGSRC}
 #
