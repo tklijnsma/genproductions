@@ -39,3 +39,20 @@ if [ "$1" == "kt1" ]; then
     rm -rf ggH_kt1_$MODEL.tgz
 
 fi
+
+
+if [ "$1" == "kt1_samecard_mtopzero" ]; then
+
+    CARDDIR="gg_H_quark-mass-effects_NNPDF30_8TeV_noPDF_mtopzero"
+    MODEL="gg_H_quark-mass-effects"
+
+    # Remove old dirs and files
+    rm -rf ggH_kt1
+    rm -rf run_full_ggH_kt1.sh
+    rm -rf run_full_ggH_kt1.log
+    rm -rf $CARDDIR.input
+    rm -rf ggH_kt1_$MODEL.tgz
+
+fi
+
+rm *~
