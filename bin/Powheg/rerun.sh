@@ -80,6 +80,6 @@ if [ "$1" == "kt1" ]; then
 
     cp production/$CARDDIR/$CARDDIR.input .
 
-    python ./run_pwg.py -p f -i $CARDDIR.input -m $MODEL -f ggH_kt1 -n 57
+    python ./run_pwg_V1.py -p f -i $CARDDIR.input -m $MODEL -f ggH_kt1 -n 57
 
 fi
