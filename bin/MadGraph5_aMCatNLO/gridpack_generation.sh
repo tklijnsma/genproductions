@@ -21,6 +21,7 @@
 
 #exit on first error
 set -e
+set -x
 
 #First you need to set couple of settings:
 
@@ -92,6 +93,9 @@ AFS_GEN_FOLDER=${RUNHOME}/${name}
 CARDSDIR=${PRODHOME}/${carddir}
 # where to find the madgraph tarred distribution
 
+# Added by Thomas
+# EXTERNALMODELDIR=${PRODHOME}/external_models
+# --> Moved to Run script
 
 MGBASEDIR=mgbasedir
 
@@ -179,13 +183,8 @@ if [ ! -d ${AFS_GEN_FOLDER}/${name}_gridpack ]; then
       export LSB_JOB_REPORT_MAIL="N"
   
       echo "set run_mode  1" >> mgconfigscript
-      if [ "$queue" == "condor" ]; then
-        echo "set cluster_type condor" >> mgconfigscript
-        echo "set cluster_queue None" >> mgconfigscript
-      else
-        echo "set cluster_type lsf" >> mgconfigscript
-        echo "set cluster_queue $queue" >> mgconfigscript
-      fi 
+      echo "set cluster_type lsf" >> mgconfigscript
+      echo "set cluster_queue $queue" >> mgconfigscript
       echo "set cluster_status_update 60 30" >> mgconfigscript
       echo "set cluster_nb_retry 3" >> mgconfigscript
       echo "set cluster_retry_wait 300" >> mgconfigscript 
@@ -221,21 +220,62 @@ if [ ! -d ${AFS_GEN_FOLDER}/${name}_gridpack ]; then
       #get needed BSM model
       if [[ $model = *[!\ ]* ]]; then
         echo "Loading extra model $model"
-        wget --no-check-certificate https://cms-project-generators.web.cern.ch/cms-project-generators/$model	
-        cd models
-        if [[ $model == *".zip"* ]]; then
-          unzip ../$model
-        elif [[ $model == *".tgz"* ]]; then
-          tar zxvf ../$model
-        elif [[ $model == *".tar"* ]]; then
-          tar xavf ../$model
-        else 
-          echo "A BSM model is specified but it is not in a standard archive (.zip or .tar)"
+
+        # Check if model exists
+        set +e
+        r=`wget https://cms-project-generators.web.cern.ch/cms-project-generators/${model}`
+        #set -e
+
+        if [ $? -ne 0 ]; then
+          echo "Attempting to copy ${model} from ${EXTERNALMODELDIR}"
+          # Copy from external models directory
+          cd models
+          cp -R $EXTERNALMODELDIR/$model .
+        else
+          wget --no-check-certificate https://cms-project-generators.web.cern.ch/cms-project-generators/$model
+          cd models
+          if [[ $model == *".zip"* ]]; then
+            unzip ../$model
+          elif [[ $model == *".tgz"* ]]; then
+            tar zxvf ../$model
+          elif [[ $model == *".tar"* ]]; then
+            tar xavf ../$model
+          else 
+            echo "A BSM model is specified but it is not in a standard archive (.zip or .tar)"
+          fi
         fi
         cd ..
       fi
     done
   fi
+  set -e
+
+  echo " "
+  echo " "
+  echo "Debugging:"
+  echo "pwd:"
+  pwd
+  echo "ls:"
+  ls
+
+  echo " "
+  echo " "
+
+  echo "ls of ../:"
+  pwd
+  echo "ls:"
+  ls
+
+  echo " "
+  echo " "
+
+  #echo "Contents of proc_card.dat:"
+  #cat proc_card.dat
+  #echo "End of contents of proc_card.dat:"
+
+  echo " "
+  echo " "
+
 
   cd $WORKDIR
   
@@ -456,7 +496,7 @@ else
   #######################
 
   echo "done" > makegrid.dat
-  echo "set gridpack True" >> makegrid.dat
+  # echo "set gridpack True" >> makegrid.dat
   if [ -e $CARDSDIR/${name}_customizecards.dat ]; then
           cat $CARDSDIR/${name}_customizecards.dat >> makegrid.dat
           echo "" >> makegrid.dat
