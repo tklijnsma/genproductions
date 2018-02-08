@@ -184,8 +184,9 @@ make_gridpack () {
       if [ -e $CARDSDIR/${name}_extramodels.dat ]; then
         echo "Loading extra models specified in $CARDSDIR/${name}_extramodels.dat"
         #strip comments
-        sed 's:#.*$::g' $CARDSDIR/${name}_extramodels.dat | while read model
-        do
+        #sed 's:#.*$::g' $CARDSDIR/${name}_extramodels.dat | while read model
+        model=`sed 's:#.*$::g' $CARDSDIR/${name}_extramodels.dat | grep -E '.zip|.tar|.tgz' $CARDSDIR/${name}_extramodels.dat`
+ #       do
           #get needed BSM model
           if [[ $model = *[!\ ]* ]]; then
             echo "Loading extra model $model"
@@ -202,7 +203,7 @@ make_gridpack () {
             fi
             cd ..
           fi
-        done
+ #       done
       fi
     
       cd $WORKDIR

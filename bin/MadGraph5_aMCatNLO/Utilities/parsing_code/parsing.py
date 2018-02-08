@@ -74,7 +74,8 @@ def generate_process(proc):
       myline.remove("p")
       myline.remove("p")
       myline.remove(">")
-      myline.remove("@0")
+      if "@0" in myline:
+        myline.remove("@0")
       #print  myline
 
   file_proc.close()
