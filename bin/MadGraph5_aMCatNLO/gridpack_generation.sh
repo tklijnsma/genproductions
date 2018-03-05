@@ -485,7 +485,7 @@ make_gridpack () {
               echo "" >> makegrid.dat
       fi
       echo "done" >> makegrid.dat
-    
+      
     #   set +e
       cat makegrid.dat | ./bin/generate_events pilotrun
       echo "finished pilot run"
