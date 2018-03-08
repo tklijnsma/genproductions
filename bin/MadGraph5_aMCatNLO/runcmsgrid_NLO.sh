@@ -93,7 +93,7 @@ if [ ! -e $LHEWORKDIR/header_for_madspin.txt ]; then
     pdfsets="PDF_SETS_REPLACE"
     scalevars="--mur=1,2,0.5 --muf=1,2,0.5 --together=muf,mur --dyn=-1"
 
-    echo "systematics $runlabel --remove_wgts=all --start_id=1001 --pdf=$pdfsets $scalevars" | ./bin/aMCatNLO
+    echo "systematics $runlabel --remove_wgts=all --start_id=1001 --pdf=$pdfsets $scalevars" | mgbasedir/bin/aMCatNLO
 	cp ./Events/${runlabel}/events.lhe.gz $LHEWORKDIR/${runname}_final.lhe.gz
 
 #else handle external tarball
@@ -144,6 +144,20 @@ fi
 cd $LHEWORKDIR
 gzip -d ${runname}_final.lhe.gz
 sed -i -e '/<mgrwgt/,/mgrwgt>/d' ${runname}_final.lhe 
+
+# Change PDGIDs of particles for Pythia showering
+if [[ "$LHEWORKDIR" == *"SVJ_s_spin1"* ]]; then
+    echo "******** CHANGING PARTICLE IDS FOR PYTHIA SHOWERING (s-channel) ********"
+    sed -i 's/5000521/4900101/g' ${runname}_final.lhe
+elif [[ "$LHEWORKDIR" == *"SVJ_t"* ]]; then
+    echo "******** CHANGING PARTICLE IDS FOR PYTHIA SHOWERING (t-channel) ********"
+    sed -i 's/49001010/4900101/g' ${runname}_final.lhe
+    sed -i 's/49001011/4900101/g' ${runname}_final.lhe
+    sed -i 's/49001012/4900101/g' ${runname}_final.lhe
+    sed -i 's/49001013/4900101/g' ${runname}_final.lhe
+    sed -i 's/49001014/4900101/g' ${runname}_final.lhe
+fi
+
 ls -l
 echo
 
