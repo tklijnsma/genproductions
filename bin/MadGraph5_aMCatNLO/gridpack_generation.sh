@@ -191,7 +191,8 @@ make_gridpack () {
           if [[ $model = *[!\ ]* ]]; then
             echo "Loading extra model $model"
             #wget --no-check-certificate https://cms-project-generators.web.cern.ch/cms-project-generators/$model
-	    cp $model .
+	    echo "Loading model from directory $CARDSDIR"
+	    cp $CARDSDIR/$model .
             cd models
             if [[ $model == *".zip"* ]]; then
               unzip ../$model
