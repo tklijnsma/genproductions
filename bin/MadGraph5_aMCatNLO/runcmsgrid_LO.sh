@@ -179,17 +179,6 @@ popd
 mv process/madevent/Events/${runlabel}/events.lhe.gz cmsgrid_final.lhe.gz
 gzip -d cmsgrid_final.lhe.gz
 
-# Change PDGIDs of particles for Pythia showering
-echo "******** CHANGING PARTICLE IDS FOR PYTHIA SHOWERING (s-channel) ********"
-sed -i 's/5000521/4900101/g' cmsgrid_final.lhe
-
-echo "******** CHANGING PARTICLE IDS FOR PYTHIA SHOWERING (t-channel) ********"
-sed -i 's/49001010/4900101/g' cmsgrid_final.lhe
-sed -i 's/49001011/4900101/g' cmsgrid_final.lhe
-sed -i 's/49001012/4900101/g' cmsgrid_final.lhe
-sed -i 's/49001013/4900101/g' cmsgrid_final.lhe
-sed -i 's/49001014/4900101/g' cmsgrid_final.lhe
-
 ls -l
 echo
 
