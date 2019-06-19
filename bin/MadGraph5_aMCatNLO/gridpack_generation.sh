@@ -315,7 +315,7 @@ make_gridpack () {
       fi
       cd $WORKDIR
     
-      eval `scram runtime -sh`
+      eval `scramv1 runtime -sh`
       export BOOSTINCLUDES=`scram tool tag boost INCLUDE`
     
       #if lhapdf6 external is available then above points to lhapdf5 and needs to be overridden
